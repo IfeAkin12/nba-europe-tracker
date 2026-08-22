@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NBA Europe Franchise Tracker — The Buildup</title>
+<meta name="description" content="Live tracker of all 12 NBA Europe target cities: who has bid, who leads, and which slots have been awarded. Updated as announcements land.">
+<meta property="og:title" content="NBA Europe Franchise Tracker">
+<meta property="og:description" content="All 12 target cities. Who's bid, who leads, what's confirmed. Updated as announcements land.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A0E1A;
+  --panel:#111827;
+  --panel-2:#0E1422;
+  --rule:#222B3E;
+  --bone:#EDEAE3;
+  --muted:#7C8497;
+  --amber:#E8A33D;
+  --green:#4ADE9B;
+  --dim:#4A5265;
+  --max:860px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  background:var(--ink);
+  color:var(--bone);
+  font-family:'Archivo',system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.55;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
+
+/* ---------- masthead ---------- */
+header{padding:44px 0 30px;border-bottom:1px solid var(--rule)}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--amber);margin-bottom:18px;
+}
+h1{
+  font-weight:800;
+  font-size:clamp(30px,7.5vw,54px);
+  line-height:.98;
+  letter-spacing:-.025em;
+  text-transform:uppercase;
+  margin-bottom:14px;
+}
+h1 span{display:block;color:var(--muted)}
+.standfirst{color:var(--muted);max-width:52ch;font-size:15px}
+.updated{
+  font-family:'IBM Plex Mono',monospace;font-size:12px;
+  color:var(--dim);margin-top:18px;
+}
+.updated b{color:var(--bone);font-weight:500}
+
+/* ---------- signature: slot counter ---------- */
+.counter{padding:30px 0;border-bottom:1px solid var(--rule)}
+.slots{display:flex;gap:5px;margin-bottom:14px}
+.slot{
+  flex:1;height:38px;border:1px solid var(--rule);
+  background:var(--panel-2);border-radius:2px;position:relative;
+}
+.slot.filled{background:var(--green);border-color:var(--green)}
+.counter-label{
+  font-family:'IBM Plex Mono',monospace;font-size:13px;
+  display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;
+}
+.counter-label .n{color:var(--bone);font-weight:600}
+.counter-label .next{color:var(--amber)}
+
+/* ---------- filters ---------- */
+.filters{
+  display:flex;gap:8px;padding:22px 0 16px;flex-wrap:wrap;
+}
+.filters button{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;
+  letter-spacing:.1em;text-transform:uppercase;
+  background:transparent;color:var(--muted);
+  border:1px solid var(--rule);border-radius:2px;
+  padding:7px 12px;cursor:pointer;transition:.15s;
+}
+.filters button:hover{color:var(--bone);border-color:var(--dim)}
+.filters button[aria-pressed="true"]{
+  background:var(--bone);color:var(--ink);border-color:var(--bone);font-weight:600;
+}
+.filters button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+
+/* ---------- board ---------- */
+.board{border-top:1px solid var(--rule)}
+.row{border-bottom:1px solid var(--rule)}
+.row-head{
+  width:100%;text-align:left;background:transparent;border:0;
+  color:inherit;font:inherit;cursor:pointer;
+  display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center;
+  padding:17px 4px;transition:.15s;
+}
+.row-head:hover{background:var(--panel-2)}
+.row-head:focus-visible{outline:2px solid var(--amber);outline-offset:-2px}
+.city{
+  font-weight:800;font-size:clamp(19px,4.4vw,25px);
+  text-transform:uppercase;letter-spacing:-.01em;line-height:1.1;
+}
+.country{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;
+  color:var(--dim);letter-spacing:.16em;margin-top:3px;
+}
+.status{
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+  letter-spacing:.11em;text-transform:uppercase;white-space:nowrap;
+  padding:5px 9px;border-radius:2px;border:1px solid;text-align:right;
+}
+.st-awarded{color:var(--green);border-color:rgba(74,222,155,.4);background:rgba(74,222,155,.08)}
+.st-frontrunner{color:var(--amber);border-color:rgba(232,163,61,.4);background:rgba(232,163,61,.08)}
+.st-bid{color:var(--bone);border-color:var(--rule)}
+.st-unnamed{color:var(--dim);border-color:var(--rule)}
+
+.detail{display:none;padding:0 4px 22px}
+.row.open .detail{display:block}
+.detail dl{display:grid;grid-template-columns:auto 1fr;gap:9px 16px;font-size:14.5px}
+.detail dt{
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.13em;
+  text-transform:uppercase;color:var(--dim);padding-top:3px;white-space:nowrap;
+}
+.detail dd{color:var(--bone)}
+.tag{
+  display:inline-block;font-family:'IBM Plex Mono',monospace;
+  font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;
+  padding:2px 6px;border-radius:2px;margin-left:7px;vertical-align:1px;
+}
+.tag-reported{background:rgba(232,163,61,.13);color:var(--amber)}
+.tag-confirmed{background:rgba(74,222,155,.13);color:var(--green)}
+.tag-unnamed{background:rgba(124,132,151,.13);color:var(--muted)}
+
+/* ---------- sections ---------- */
+section{padding:44px 0;border-bottom:1px solid var(--rule)}
+h2{
+  font-family:'IBM Plex Mono',monospace;font-size:11px;
+  letter-spacing:.22em;text-transform:uppercase;color:var(--amber);
+  margin-bottom:22px;font-weight:500;
+}
+.facts{display:grid;gap:1px;background:var(--rule);border:1px solid var(--rule)}
+.fact{background:var(--ink);padding:15px 16px;display:grid;grid-template-columns:1fr;gap:3px}
+.fact .k{
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;
+  letter-spacing:.13em;text-transform:uppercase;color:var(--dim);
+}
+.fact .v{font-size:15px}
+@media(min-width:620px){.facts{grid-template-columns:1fr 1fr}}
+
+.timeline{list-style:none}
+.timeline li{
+  display:grid;grid-template-columns:96px 1fr;gap:16px;
+  padding:13px 0;border-bottom:1px solid var(--rule);font-size:15px;
+}
+.timeline li:last-child{border-bottom:0}
+.timeline .date{
+  font-family:'IBM Plex Mono',monospace;font-size:11.5px;
+  color:var(--dim);letter-spacing:.06em;padding-top:3px;
+}
+.timeline li.done .date{color:var(--green)}
+.timeline li.now{background:rgba(232,163,61,.06);padding-left:12px;margin-left:-12px}
+.timeline li.now .date{color:var(--amber)}
+
+/* ---------- cta ---------- */
+.cta{
+  background:var(--panel);border:1px solid var(--rule);
+  border-radius:3px;padding:28px 22px;text-align:left;
+}
+.cta h3{font-weight:800;font-size:24px;text-transform:uppercase;letter-spacing:-.015em;margin-bottom:9px}
+.cta p{color:var(--muted);font-size:15px;margin-bottom:20px;max-width:46ch}
+.cta a{
+  display:inline-block;background:var(--amber);color:var(--ink);
+  font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;
+  letter-spacing:.13em;text-transform:uppercase;
+  padding:13px 22px;border-radius:2px;text-decoration:none;transition:.15s;
+}
+.cta a:hover{background:var(--bone)}
+.cta a:focus-visible{outline:2px solid var(--bone);outline-offset:3px}
+
+footer{padding:34px 0 60px;color:var(--dim);font-size:13px}
+footer p{margin-bottom:9px;max-width:60ch}
+footer a{color:var(--muted)}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">The Buildup · Franchise Tracker</div>
+  <h1>NBA Europe<span>12 cities. 12 slots.</span></h1>
+  <p class="standfirst">Twelve permanent franchises are being awarded on a rolling basis ahead of an October 2027 tip-off. This page tracks every city — who has bid, who leads, and what is actually confirmed rather than rumoured.</p>
+  <p class="updated">Last updated <b id="updated"></b></p>
+</header>
+
+<div class="counter">
+  <div class="slots" id="slots" role="img" aria-label="Franchise slots awarded so far"></div>
+  <div class="counter-label">
+    <span><span class="n" id="awarded-n">0</span> of 12 slots awarded</span>
+    <span class="next" id="next-note"></span>
+  </div>
+</div>
+
+<div class="filters" role="group" aria-label="Filter cities by status">
+  <button data-f="all" aria-pressed="true">All 12</button>
+  <button data-f="awarded" aria-pressed="false">Awarded</button>
+  <button data-f="frontrunner" aria-pressed="false">Frontrunner</button>
+  <button data-f="bid" aria-pressed="false">Bid in</button>
+  <button data-f="unnamed" aria-pressed="false">No named bidder</button>
+</div>
+
+<div class="board" id="board"></div>
+
+<section>
+  <h2>How the league works</h2>
+  <div class="facts">
+    <div class="fact"><span class="k">Format</span><span class="v">16 teams — 12 permanent franchises, 4 annual qualifiers</span></div>
+    <div class="fact"><span class="k">Qualifying route</span><span class="v">FIBA Basketball Champions League, domestic performance, or an end-of-season play-in</span></div>
+    <div class="fact"><span class="k">Season structure</span><span class="v">Round-robin regular season into a multi-round playoff and finals</span></div>
+    <div class="fact"><span class="k">Launch</span><span class="v">October 2027, for the 2027–28 season</span></div>
+    <div class="fact"><span class="k">Entry price</span><span class="v">$500m–$1bn, with several bids reported above $1bn</span></div>
+    <div class="fact"><span class="k">Equity split</span><span class="v">NBA owners 50%, the 12 permanent franchise owners 50%</span></div>
+    <div class="fact"><span class="k">Break-even</span><span class="v">Franchises projected to break even by season three</span></div>
+    <div class="fact"><span class="k">Run by</span><span class="v">NBA with FIBA. Mark Tatum leads; George Aivazoglou is MD for Europe</span></div>
+  </div>
+</section>
+
+<section>
+  <h2>Where we are</h2>
+  <ul class="timeline">
+    <li class="done"><span class="date">Mar 2025</span><span>NBA and FIBA jointly announce they are exploring a new pan-European league.</span></li>
+    <li class="done"><span class="date">Dec 2025</span><span>The two bodies confirm they will engage prospective teams and ownership groups.</span></li>
+    <li class="done"><span class="date">Feb 2026</span><span>Bidding opens across the 12 target cities.</span></li>
+    <li class="done"><span class="date">31 Mar 2026</span><span>Non-binding bids due. More than 120 investors reported to have engaged.</span></li>
+    <li class="done"><span class="date">30 Jun 2026</span><span>Final bids close. Over 20 ownership groups submit across all 12 cities.</span></li>
+    <li class="now"><span class="date">Autumn 2026</span><span>Franchises awarded on a rolling basis. Mark Tatum indicated a 60–90 day window from late June, putting the first names between late August and the end of the year.</span></li>
+    <li><span class="date">2026–27</span><span>Qualifying season for the four non-permanent slots.</span></li>
+    <li><span class="date">Oct 2027</span><span>Inaugural NBA Europe season tips off.</span></li>
+  </ul>
+</section>
+
+<section>
+  <h2>The open question</h2>
+  <p style="max-width:58ch;color:var(--muted);font-size:15px">The EuroLeague is the unresolved variable. Negotiations are ongoing and the NBA has said it will proceed either way. Several EuroLeague clubs have submitted bids, and those clubs are reported to hold exit clauses allowing them to leave. Current NBA owners cannot own NBA Europe teams, though former owners appear in several bidding groups.</p>
+</section>
+
+<section style="border-bottom:0">
+  <div class="cta">
+    <h3>Get every announcement first</h3>
+    <p>The Buildup covers NBA Europe as it's being built — the bids, the money, the arenas, and what it means for basketball in the UK. One email a week, and a note the moment a franchise lands.</p>
+    <a href="#subscribe" id="subscribe-link">Subscribe free</a>
+  </div>
+</section>
+
+<footer>
+  <p>The Buildup is an independent newsletter. It is not affiliated with, endorsed by, or connected to the NBA, FIBA, or any club or bidding group.</p>
+  <p>Status labels reflect public reporting at the time of the last update. Anything marked <span class="tag tag-reported" style="margin:0">reported</span> has not been confirmed by the NBA. Spotted something wrong or out of date? <a href="#contact">Tell us</a>.</p>
+</footer>
+
+</div>
+
+<script>
+/* ============================================================
+   EDIT BELOW WHEN NEWS BREAKS — nothing else needs touching.
+
+   status:     'awarded' | 'frontrunner' | 'bid' | 'unnamed'
+   confidence: 'confirmed' | 'reported' | 'unnamed'
+   ============================================================ */
+
+const LAST_UPDATED = '21 August 2026';
+const NEXT_NOTE    = 'First announcements expected imminently';
+
+const CITIES = [
+  {
+    city:'London', country:'England', status:'bid', confidence:'reported',
+    bidders:'A group led by the chief executive of Palo Alto Networks is reported to have bid in excess of $1bn. Buss Sports Capital, connected to the family that previously owned the Lakers, is also reported to have bid.',
+    venue:'The O2 hosted the NBA London Game in January 2026 — the 19th NBA game in the UK.',
+    note:'One of two British target cities. The NBA and UK government announced a joint £10m grassroots basketball investment running to 2028.'
+  },
+  {
+    city:'Manchester', country:'England', status:'bid', confidence:'reported',
+    bidders:'Buss Sports Capital reported to have bid.',
+    venue:'Co-op Live is scheduled to host an NBA regular-season game in 2027 — the city\u2019s first.',
+    note:'The second British target. Arena infrastructure is unusually strong for a city without top-level basketball.'
+  },
+  {
+    city:'Paris', country:'France', status:'frontrunner', confidence:'reported',
+    bidders:'Qatar Sports Investments, owner of Paris Saint-Germain, reported to have bid.',
+    venue:'Accor Arena hosts NBA regular-season games in 2027 and 2028.',
+    note:'A football-club route into basketball — one of the models the NBA has said it expects.'
+  },
+  {
+    city:'Lyon', country:'France', status:'bid', confidence:'reported',
+    bidders:'Buss Sports Capital reported to have bid. ASVEL Basket has been named as a possible acquisition target.',
+    venue:'LDLC Arena, opened 2023.',
+    note:'The smaller of the two French markets, with an established basketball club already in place.'
+  },
+  {
+    city:'Madrid', country:'Spain', status:'bid', confidence:'reported',
+    bidders:'Real Madrid reported to have been invited to buy in or convert its basketball section into a permanent franchise.',
+    venue:'Movistar Arena.',
+    note:'Real Madrid is among the EuroLeague clubs whose participation would reshape the competitive picture.'
+  },
+  {
+    city:'Barcelona', country:'Spain', status:'bid', confidence:'reported',
+    bidders:'FC Barcelona reported to have been invited to buy in or convert its basketball section.',
+    venue:'Palau Blaugrana.',
+    note:'As with Madrid, a EuroLeague incumbent weighing an exit.'
+  },
+  {
+    city:'Rome', country:'Italy', status:'frontrunner', confidence:'confirmed',
+    bidders:'An ownership group including Luka Don\u010di\u0107, former Mavericks executive Donnie Nelson, Valerio Bianchini and Rimantas Kauk\u0117nas. The group bought Vanoli Cremona and is relocating it to Rome for 2026\u201327. Buss Sports Capital has been reported as a possible addition.',
+    venue:'To be confirmed following relocation.',
+    note:'The only bid publicly confirmed by its own ownership group, via a statement from Don\u010di\u0107.'
+  },
+  {
+    city:'Milan', country:'Italy', status:'frontrunner', confidence:'reported',
+    bidders:'RedBird Capital, owner of AC Milan, reported to be working closely with the NBA and widely seen as frontrunner.',
+    venue:'Unipol Forum.',
+    note:'Another football-ownership route, and one of the most advanced bids reported.'
+  },
+  {
+    city:'Berlin', country:'Germany', status:'bid', confidence:'reported',
+    bidders:'No bidder publicly named. Alba Berlin has been cited as a possible acquisition target for incoming investors.',
+    venue:'Uber Arena hosted Germany\u2019s first NBA regular-season game in January 2026, and hosts again in 2028.',
+    note:'Proven NBA-standard arena and a recent sell-out crowd.'
+  },
+  {
+    city:'Munich', country:'Germany', status:'bid', confidence:'reported',
+    bidders:'No bidder publicly named. Bayern Munich has been mentioned as a club that could be involved.',
+    venue:'SAP Garden, opened 2024.',
+    note:'A newly built arena and an existing EuroLeague-level basketball operation.'
+  },
+  {
+    city:'Athens', country:'Greece', status:'unnamed', confidence:'unnamed',
+    bidders:'No bidder publicly named. The NBA has confirmed it received bids in all 12 target cities.',
+    venue:'To be confirmed.',
+    note:'One of Europe\u2019s deepest basketball markets, and the city where the EuroLeague question bites hardest.'
+  },
+  {
+    city:'Istanbul', country:'Turkey', status:'unnamed', confidence:'unnamed',
+    bidders:'No bidder publicly named. The NBA has confirmed it received bids in all 12 target cities.',
+    venue:'To be confirmed.',
+    note:'A report by The Sports Consultancy projected $2.2bn in economic activity for the city between 2027 and 2036.'
+  }
+];
+
+/* ============================================================
+   Rendering — no need to edit below here.
+   ============================================================ */
+
+const LABEL = {
+  awarded:'Awarded',
+  frontrunner:'Reported frontrunner',
+  bid:'Bid submitted',
+  unnamed:'No named bidder'
+};
+const TAG = { confirmed:'Confirmed', reported:'Reported', unnamed:'Unconfirmed' };
+
+document.getElementById('updated').textContent = LAST_UPDATED;
+document.getElementById('next-note').textContent = NEXT_NOTE;
+
+const awardedCount = CITIES.filter(c => c.status === 'awarded').length;
+document.getElementById('awarded-n').textContent = awardedCount;
+
+const slots = document.getElementById('slots');
+for (let i = 0; i < 12; i++) {
+  const d = document.createElement('div');
+  d.className = 'slot' + (i < awardedCount ? ' filled' : '');
+  slots.appendChild(d);
+}
+
+const board = document.getElementById('board');
+
+CITIES.forEach((c, i) => {
+  const row = document.createElement('div');
+  row.className = 'row';
+  row.dataset.status = c.status;
+
+  const panelId = 'panel-' + i;
+
+  row.innerHTML = `
+    <button class="row-head" aria-expanded="false" aria-controls="${panelId}">
+      <span>
+        <span class="city">${c.city}</span>
+        <span class="country">${c.country.toUpperCase()}</span>
+      </span>
+      <span class="status st-${c.status}">${LABEL[c.status]}</span>
+    </button>
+    <div class="detail" id="${panelId}">
+      <dl>
+        <dt>Bidders</dt>
+        <dd>${c.bidders}<span class="tag tag-${c.confidence}">${TAG[c.confidence]}</span></dd>
+        <dt>Venue</dt>
+        <dd>${c.venue}</dd>
+        <dt>Context</dt>
+        <dd>${c.note}</dd>
+      </dl>
+    </div>`;
+
+  const btn = row.querySelector('.row-head');
+  btn.addEventListener('click', () => {
+    const open = row.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  board.appendChild(row);
+});
+
+document.querySelectorAll('.filters button').forEach(b => {
+  b.addEventListener('click', () => {
+    const f = b.dataset.f;
+    document.querySelectorAll('.filters button')
+      .forEach(x => x.setAttribute('aria-pressed', x === b ? 'true' : 'false'));
+    document.querySelectorAll('.row').forEach(r => {
+      r.style.display = (f === 'all' || r.dataset.status === f) ? '' : 'none';
+    });
+  });
+});
+</script>
+
+</body>
+</html>
