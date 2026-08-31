@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NBA Europe Franchise Tracker — The Buildup</title>
+<title>NBA Europe Franchise Tracker — The Hoops Buildup</title>
 <meta name="description" content="Live tracker of all 12 NBA Europe target cities: who has bid, who leads, and which slots have been awarded. Updated as announcements land.">
 <meta property="og:title" content="NBA Europe Franchise Tracker">
 <meta property="og:description" content="All 12 target cities. Who's bid, who leads, what's confirmed. Updated as announcements land.">
+<meta property="og:type" content="website">
 <meta property="og:image" content="https://thehoopsbuildup.com/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
@@ -62,11 +62,11 @@ h1 span{display:block;color:var(--muted)}
 .updated b{color:var(--bone);font-weight:500}
 
 /* ---------- signature: slot counter ---------- */
-.counter{padding:30px 0;border-bottom:1px solid var(--rule)}
+.counter{padding:30px 0 0}
 .slots{display:flex;gap:5px;margin-bottom:14px}
 .slot{
   flex:1;height:38px;border:1px solid var(--rule);
-  background:var(--panel-2);border-radius:2px;position:relative;
+  background:var(--panel-2);border-radius:2px;
 }
 .slot.filled{background:var(--green);border-color:var(--green)}
 .counter-label{
@@ -76,10 +76,28 @@ h1 span{display:block;color:var(--muted)}
 .counter-label .n{color:var(--bone);font-weight:600}
 .counter-label .next{color:var(--amber)}
 
-/* ---------- filters ---------- */
-.filters{
-  display:flex;gap:8px;padding:22px 0 16px;flex-wrap:wrap;
+/* ---------- CTA: top (compact) ---------- */
+.cta-top{
+  margin:22px 0 0;padding:16px 18px;
+  background:var(--panel-2);border:1px solid var(--rule);border-radius:3px;
+  display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;
 }
+.cta-top p{font-size:15px;margin:0;flex:1 1 260px}
+.cta-top p b{color:var(--bone);font-weight:600}
+.cta-top span{display:block;color:var(--muted);font-size:13.5px;margin-top:2px}
+.btn{
+  display:inline-block;background:var(--amber);color:var(--ink);
+  font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;
+  letter-spacing:.13em;text-transform:uppercase;
+  padding:12px 20px;border-radius:2px;text-decoration:none;
+  transition:.15s;white-space:nowrap;
+}
+.btn:hover{background:var(--bone)}
+.btn:focus-visible{outline:2px solid var(--bone);outline-offset:3px}
+
+/* ---------- filters ---------- */
+.filters{display:flex;gap:8px;padding:26px 0 16px;flex-wrap:wrap;
+  border-top:1px solid var(--rule);margin-top:28px}
 .filters button{
   font-family:'IBM Plex Mono',monospace;font-size:11px;
   letter-spacing:.1em;text-transform:uppercase;
@@ -139,6 +157,17 @@ h1 span{display:block;color:var(--muted)}
 .tag-confirmed{background:rgba(74,222,155,.13);color:var(--green)}
 .tag-unnamed{background:rgba(124,132,151,.13);color:var(--muted)}
 
+/* ---------- CTA: mid ---------- */
+.cta-mid{
+  margin:30px 0;padding:26px 22px;text-align:center;
+  background:var(--panel);border:1px solid var(--rule);border-radius:3px;
+}
+.cta-mid h3{
+  font-weight:800;font-size:clamp(20px,4.6vw,26px);
+  text-transform:uppercase;letter-spacing:-.015em;margin-bottom:8px;
+}
+.cta-mid p{color:var(--muted);font-size:15px;margin:0 auto 20px;max-width:40ch}
+
 /* ---------- sections ---------- */
 section{padding:44px 0;border-bottom:1px solid var(--rule)}
 h2{
@@ -169,21 +198,13 @@ h2{
 .timeline li.now{background:rgba(232,163,61,.06);padding-left:12px;margin-left:-12px}
 .timeline li.now .date{color:var(--amber)}
 
-/* ---------- cta ---------- */
+/* ---------- CTA: bottom ---------- */
 .cta{
   background:var(--panel);border:1px solid var(--rule);
-  border-radius:3px;padding:28px 22px;text-align:left;
+  border-radius:3px;padding:28px 22px;
 }
 .cta h3{font-weight:800;font-size:24px;text-transform:uppercase;letter-spacing:-.015em;margin-bottom:9px}
 .cta p{color:var(--muted);font-size:15px;margin-bottom:20px;max-width:46ch}
-.cta a{
-  display:inline-block;background:var(--amber);color:var(--ink);
-  font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;
-  letter-spacing:.13em;text-transform:uppercase;
-  padding:13px 22px;border-radius:2px;text-decoration:none;transition:.15s;
-}
-.cta a:hover{background:var(--bone)}
-.cta a:focus-visible{outline:2px solid var(--bone);outline-offset:3px}
 
 footer{padding:34px 0 60px;color:var(--dim);font-size:13px}
 footer p{margin-bottom:9px;max-width:60ch}
@@ -197,7 +218,7 @@ footer a{color:var(--muted)}
 <div class="wrap">
 
 <header>
-  <div class="eyebrow">The Buildup · Franchise Tracker</div>
+  <div class="eyebrow">The Hoops Buildup · Franchise Tracker</div>
   <h1>NBA Europe<span>12 cities. 12 slots.</span></h1>
   <p class="standfirst">Twelve permanent franchises are being awarded on a rolling basis ahead of an October 2027 tip-off. This page tracks every city — who has bid, who leads, and what is actually confirmed rather than rumoured.</p>
   <p class="updated">Last updated <b id="updated"></b></p>
@@ -208,6 +229,12 @@ footer a{color:var(--muted)}
   <div class="counter-label">
     <span><span class="n" id="awarded-n">0</span> of 12 slots awarded</span>
     <span class="next" id="next-note"></span>
+  </div>
+
+  <div class="cta-top">
+    <p><b>Get an email the moment a franchise is awarded.</b>
+       <span>No spam. Just the news, first.</span></p>
+    <a class="btn cta-link" href="#">Notify me</a>
   </div>
 </div>
 
@@ -220,6 +247,12 @@ footer a{color:var(--muted)}
 </div>
 
 <div class="board" id="board"></div>
+
+<div class="cta-mid">
+  <h3>Don't refresh this page</h3>
+  <p id="cta-mid-copy">Twelve slots. Announcements are landing over the coming weeks. Get an email the moment one does.</p>
+  <a class="btn cta-link" href="#">Notify me</a>
+</div>
 
 <section>
   <h2>How the league works</h2>
@@ -256,29 +289,36 @@ footer a{color:var(--muted)}
 
 <section style="border-bottom:0">
   <div class="cta">
-    <h3>Get every announcement first</h3>
-    <p>The Buildup covers NBA Europe as it's being built — the bids, the money, the arenas, and what it means for basketball in the UK. One email a week, and a note the moment a franchise lands.</p>
-    <a href="https://thehoopsbuildup.beehiiv.com" id="subscribe-link">Subscribe free</a>
+    <h3>Follow the buildup</h3>
+    <p>One email a week on NBA Europe — the bids, the money, the arenas, and what it means for basketball in our cities. Plus a note the moment a franchise is awarded.</p>
+    <a class="btn cta-link" href="#">Subscribe free</a>
   </div>
 </section>
 
 <footer>
-  <p>The Buildup is an independent newsletter. It is not affiliated with, endorsed by, or connected to the NBA, FIBA, or any club or bidding group.</p>
-  <p>Status labels reflect public reporting at the time of the last update. Anything marked <span class="tag tag-reported" style="margin:0">reported</span> has not been confirmed by the NBA. Spotted something wrong or out of date? <a href="ifeoluadeyemi@gmail.com">Tell us</a>.</p>
+  <p>The Hoops Buildup is an independent newsletter. It is not affiliated with, endorsed by, or connected to the NBA, FIBA, or any club or bidding group.</p>
+  <p>Status labels reflect public reporting at the time of the last update. Anything marked <span class="tag tag-reported" style="margin:0">reported</span> has not been confirmed by the NBA. Spotted something wrong or out of date? <a id="contact-link" href="#">Tell me</a>.</p>
 </footer>
 
 </div>
 
 <script>
 /* ============================================================
-   EDIT BELOW WHEN NEWS BREAKS — nothing else needs touching.
+   YOUR DETAILS — edit these four lines only.
+   ============================================================ */
+
+const SUBSCRIBE_URL  = 'https://thehoopsbuildup.beehiiv.com';
+const CONTACT_EMAIL  = 'ifeoluadeyemi@gmail.com';
+const LAST_UPDATED   = '21 August 2026';
+const NEXT_NOTE      = 'First announcements expected imminently';
+
+
+/* ============================================================
+   EDIT BELOW WHEN NEWS BREAKS
 
    status:     'awarded' | 'frontrunner' | 'bid' | 'unnamed'
    confidence: 'confirmed' | 'reported' | 'unnamed'
    ============================================================ */
-
-const LAST_UPDATED = '21 August 2026';
-const NEXT_NOTE    = 'First announcements expected imminently';
 
 const CITIES = [
   {
@@ -370,8 +410,20 @@ const TAG = { confirmed:'Confirmed', reported:'Reported', unnamed:'Unconfirmed' 
 document.getElementById('updated').textContent = LAST_UPDATED;
 document.getElementById('next-note').textContent = NEXT_NOTE;
 
+/* wire every subscribe button + the contact link from the config above */
+document.querySelectorAll('.cta-link').forEach(a => { a.href = SUBSCRIBE_URL; });
+document.getElementById('contact-link').href = 'mailto:' + CONTACT_EMAIL;
+
 const awardedCount = CITIES.filter(c => c.status === 'awarded').length;
 document.getElementById('awarded-n').textContent = awardedCount;
+
+/* mid-page copy adapts once slots start filling */
+if (awardedCount > 0) {
+  const remaining = 12 - awardedCount;
+  document.getElementById('cta-mid-copy').textContent =
+    awardedCount + (awardedCount === 1 ? ' slot awarded. ' : ' slots awarded. ') +
+    remaining + ' still open. Get an email the moment the next one lands.';
+}
 
 const slots = document.getElementById('slots');
 for (let i = 0; i < 12; i++) {
