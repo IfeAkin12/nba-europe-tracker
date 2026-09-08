@@ -276,7 +276,7 @@ footer a{color:var(--muted)}
     <li class="done"><span class="date">Feb 2026</span><span>Bidding opens across the 12 target cities.</span></li>
     <li class="done"><span class="date">31 Mar 2026</span><span>Non-binding bids due. More than 120 investors reported to have engaged.</span></li>
     <li class="done"><span class="date">30 Jun 2026</span><span>Final bids close. Over 20 ownership groups submit across all 12 cities.</span></li>
-    <li class="now"><span class="date">Autumn 2026</span><span>Franchises awarded on a rolling basis. Mark Tatum indicated a 60–90 day window from late June, putting the first names between late August and the end of the year.</span></li>
+    <li class="now"><span class="date">Autumn 2026</span><span>Franchises awarded on a rolling basis. Mark Tatum indicated a 60–90 day window from late June, putting the first names potentially being announced around 28 September. Which is the same window as the EuroLeague announcements.</span></li>
     <li><span class="date">2026–27</span><span>Qualifying season for the four non-permanent slots.</span></li>
     <li><span class="date">Oct 2027</span><span>Inaugural NBA Europe season tips off.</span></li>
   </ul>
@@ -284,7 +284,7 @@ footer a{color:var(--muted)}
 
 <section>
   <h2>The open question</h2>
-  <p style="max-width:58ch;color:var(--muted);font-size:15px">The EuroLeague is the unresolved variable. Negotiations are ongoing and the NBA has said it will proceed either way. Several EuroLeague clubs have submitted bids, and those clubs are reported to hold exit clauses allowing them to leave. Current NBA owners cannot own NBA Europe teams, though former owners appear in several bidding groups.</p>
+  <p style="max-width:58ch;color:var(--muted);font-size:15px">The EuroLeague is the unresolved variable. Negotiations are ongoing and the NBA has said it will proceed either way. Several EuroLeague clubs have submitted bids, and those clubs are reported to hold exit clauses allowing them to leave. Current NBA owners cannot own NBA Europe teams, though former owners appear in several bidding groups. *As of 4 September the EuroLeague CEO is on record saying that without a deal they'll compete, and the expansion vote lands at the end of this month.</p>
 </section>
 
 <section style="border-bottom:0">
@@ -309,7 +309,7 @@ footer a{color:var(--muted)}
 
 const SUBSCRIBE_URL  = 'https://thehoopsbuildup.beehiiv.com';
 const CONTACT_EMAIL  = 'ifeoluadeyemi@gmail.com';
-const LAST_UPDATED   = '21 August 2026';
+const LAST_UPDATED   = '8 September 2026';
 const NEXT_NOTE      = 'First announcements expected imminently';
 
 
@@ -325,73 +325,85 @@ const CITIES = [
     city:'London', country:'England', status:'bid', confidence:'reported',
     bidders:'A group led by the chief executive of Palo Alto Networks is reported to have bid in excess of $1bn. Buss Sports Capital, connected to the family that previously owned the Lakers, is also reported to have bid.',
     venue:'The O2 hosted the NBA London Game in January 2026 — the 19th NBA game in the UK.',
-    note:'One of two British target cities. The NBA and UK government announced a joint £10m grassroots basketball investment running to 2028.'
+    note:'One of two British target cities. The NBA and UK government announced a joint £10m grassroots basketball investment running to 2028.',
+    euroleague: 'London Lions shortlisted for permanent license.'
   },
   {
     city:'Manchester', country:'England', status:'bid', confidence:'reported',
     bidders:'Buss Sports Capital reported to have bid.',
     venue:'Co-op Live is scheduled to host an NBA regular-season game in 2027 — the city\u2019s first.',
-    note:'The second British target. Arena infrastructure is unusually strong for a city without top-level basketball.'
+    note:'The second British target. Arena infrastructure is unusually strong for a city without top-level basketball.',
+    euroleague: 'Nothing in the pipeline.'
   },
   {
     city:'Paris', country:'France', status:'frontrunner', confidence:'reported',
     bidders:'Qatar Sports Investments, owner of Paris Saint-Germain, reported to have bid.',
     venue:'Accor Arena hosts NBA regular-season games in 2027 and 2028.',
-    note:'A football-club route into basketball — one of the models the NBA has said it expects.'
+    note:'A football-club route into basketball — one of the models the NBA has said it expects.',
+    euroleague: 'Paris Basketball has a one year wildcard and also shortlisted for a permanent license.'
   },
   {
     city:'Lyon', country:'France', status:'bid', confidence:'reported',
     bidders:'Buss Sports Capital reported to have bid. ASVEL Basket has been named as a possible acquisition target.',
     venue:'LDLC Arena, opened 2023.',
-    note:'The smaller of the two French markets, with an established basketball club already in place.'
+    note:'The smaller of the two French markets, with an established basketball club already in place.',
+    euroleague: 'LDLC ASVEL already a licensed club.'
   },
   {
     city:'Madrid', country:'Spain', status:'bid', confidence:'reported',
     bidders:'Real Madrid reported to have been invited to buy in or convert its basketball section into a permanent franchise.',
     venue:'Movistar Arena.',
-    note:'Real Madrid is among the EuroLeague clubs whose participation would reshape the competitive picture.'
+    note:'Real Madrid is among the EuroLeague clubs whose participation would reshape the competitive picture.',
+    euroleague: 'Real Madrid new 10 year license deal approved June 2026.'
   },
   {
     city:'Barcelona', country:'Spain', status:'bid', confidence:'reported',
     bidders:'FC Barcelona reported to have been invited to buy in or convert its basketball section.',
     venue:'Palau Blaugrana.',
-    note:'As with Madrid, a EuroLeague incumbent weighing an exit.'
+    note:'As with Madrid, a EuroLeague incumbent weighing an exit.',
+    euroleague: 'FC Barcelona already a licensed club.'
   },
   {
     city:'Rome', country:'Italy', status:'frontrunner', confidence:'confirmed',
     bidders:'An ownership group including Luka Don\u010di\u0107, former Mavericks executive Donnie Nelson, Valerio Bianchini and Rimantas Kauk\u0117nas. The group bought Vanoli Cremona and is relocating it to Rome for 2026\u201327. Buss Sports Capital has been reported as a possible addition.',
     venue:'To be confirmed following relocation.',
-    note:'The only bid publicly confirmed by its own ownership group, via a statement from Don\u010di\u0107.'
+    note:'The only bid publicly confirmed by its own ownership group, via a statement from Don\u010di\u0107.',
+    euroleague: 'Roma Maxima shortlised for permanent license.'
   },
   {
     city:'Milan', country:'Italy', status:'frontrunner', confidence:'reported',
     bidders:'RedBird Capital, owner of AC Milan, reported to be working closely with the NBA and widely seen as frontrunner.',
     venue:'Unipol Forum.',
-    note:'Another football-ownership route, and one of the most advanced bids reported.'
+    note:'Another football-ownership route, and one of the most advanced bids reported.',
+    euroleague: 'Olimpia Milano already a licensed club.'
   },
   {
     city:'Berlin', country:'Germany', status:'bid', confidence:'reported',
     bidders:'No bidder publicly named. Alba Berlin has been cited as a possible acquisition target for incoming investors.',
     venue:'Uber Arena hosted Germany\u2019s first NBA regular-season game in January 2026, and hosts again in 2028.',
-    note:'Proven NBA-standard arena and a recent sell-out crowd.'
+    note:'Proven NBA-standard arena and a recent sell-out crowd.',
+    euroleague: 'Nothing in the pipeline.'
   },
   {
     city:'Munich', country:'Germany', status:'bid', confidence:'reported',
     bidders:'No bidder publicly named. Bayern Munich has been mentioned as a club that could be involved.',
     venue:'SAP Garden, opened 2024.',
-    note:'A newly built arena and an existing EuroLeague-level basketball operation.'
+    note:'A newly built arena and an existing EuroLeague-level basketball operation.',
+    euroleague: 'Bayern Munich already a licensed club.'
   },
   {
     city:'Athens', country:'Greece', status:'unnamed', confidence:'unnamed',
     bidders:'No bidder publicly named. The NBA has confirmed it received bids in all 12 target cities.',
     venue:'To be confirmed.',
-    note:'One of Europe\u2019s deepest basketball markets, and the city where the EuroLeague question bites hardest.'
+    note:'One of Europe\u2019s deepest basketball markets, and the city where the EuroLeague question bites hardest.',
+    euroleague: 'Panathinaikos plus Olympiacos in Piraeus'
   },
   {
     city:'Istanbul', country:'Turkey', status:'unnamed', confidence:'unnamed',
     bidders:'No bidder publicly named. The NBA has confirmed it received bids in all 12 target cities.',
     venue:'To be confirmed.',
-    note:'A report by The Sports Consultancy projected $2.2bn in economic activity for the city between 2027 and 2036.'
+    note:'A report by The Sports Consultancy projected $2.2bn in economic activity for the city between 2027 and 2036.',
+    euroleague: 'Anadolu Efes, Fenerbahçe, plus Beşiktaş on a one-year wildcard'
   }
 ];
 
