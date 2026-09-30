@@ -231,10 +231,10 @@ footer a{color:var(--muted)}
     <span class="next" id="next-note"></span>
   </div>
 
-  <div class="cta-top">
-    <p><b>Get an email the moment a franchise is awarded.</b>
-       <span>No spam. Just the news, first.</span></p>
-    <a class="btn cta-link" href="#">Notify me</a>
+ <div class="cta-top">
+    <p><b>Follow the buildup, weekly.</b>
+       <span>One email a week on NBA Europe — the bids, the money, the arenas. Every issue free to read.</span></p>
+    <a class="btn cta-link" href="#">Subscribe free</a>
   </div>
 </div>
 
@@ -249,9 +249,9 @@ footer a{color:var(--muted)}
 <div class="board" id="board"></div>
 
 <div class="cta-mid">
-  <h3>Don't refresh this page</h3>
-  <p id="cta-mid-copy">Twelve slots. Announcements are landing over the coming weeks. Get an email the moment one does.</p>
-  <a class="btn cta-link" href="#">Notify me</a>
+  <h3>The full story, every week</h3>
+  <p id="cta-mid-copy">This page tracks what has happened. The newsletter explains what it means — one email a week, plus the full archive of every issue so far.</p>
+  <a class="btn cta-link" href="#">Subscribe free</a>
 </div>
 
 <section>
@@ -436,8 +436,8 @@ document.getElementById('awarded-n').textContent = awardedCount;
 if (awardedCount > 0) {
   const remaining = 12 - awardedCount;
   document.getElementById('cta-mid-copy').textContent =
-    awardedCount + (awardedCount === 1 ? ' slot awarded. ' : ' slots awarded. ') +
-    remaining + ' still open. Get an email the moment the next one lands.';
+        awardedCount + (awardedCount === 1 ? ' slot awarded, ' : ' slots awarded, ') +
+    remaining + ' still open. The newsletter covers each one as it lands — one email a week, plus the full archive.';
 }
 
 const slots = document.getElementById('slots');
