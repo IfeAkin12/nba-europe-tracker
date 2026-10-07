@@ -209,6 +209,13 @@ h2{
 footer{padding:34px 0 60px;color:var(--dim);font-size:13px}
 footer p{margin-bottom:9px;max-width:60ch}
 footer a{color:var(--muted)}
+footer .social{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;letter-spacing:.14em;text-transform:uppercase;
+  margin-top:16px;
+}
+footer .social a{color:var(--amber);text-decoration:none}
+footer .social a:hover{color:var(--bone)}
 
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
@@ -304,6 +311,7 @@ footer a{color:var(--muted)}
 <footer>
   <p>The Hoops Buildup is an independent newsletter. It is not affiliated with, endorsed by, or connected to the NBA, FIBA, or any club or bidding group.</p>
   <p>Status labels reflect public reporting at the time of the last update. Anything marked <span class="tag tag-reported" style="margin:0">reported</span> has not been confirmed by the NBA. Spotted something wrong or out of date? <a id="contact-link" href="#">Tell me</a>.</p>
+  <p class="social"><a id="instagram-link" href="#">Instagram</a> &middot; <a class="cta-link" href="#">Newsletter</a></p>
 </footer>
 
 </div>
@@ -315,6 +323,7 @@ footer a{color:var(--muted)}
 
 const SUBSCRIBE_URL  = 'https://thehoopsbuildup.beehiiv.com';
 const CONTACT_EMAIL  = 'hello@thehoopsbuildup.com';
+const INSTAGRAM_URL  = 'https://instagram.com/thehoopsbuildup';
 const LAST_UPDATED   = '6 October 2026';
 const NEXT_NOTE      = 'EuroLeague rejects first NBA offer — talks continue';
 
@@ -431,6 +440,7 @@ document.getElementById('next-note').textContent = NEXT_NOTE;
 /* wire every subscribe button + the contact link from the config above */
 document.querySelectorAll('.cta-link').forEach(a => { a.href = SUBSCRIBE_URL; });
 document.getElementById('contact-link').href = 'mailto:' + CONTACT_EMAIL;
+document.getElementById('instagram-link').href = INSTAGRAM_URL;
 
 const awardedCount = CITIES.filter(c => c.status === 'awarded').length;
 document.getElementById('awarded-n').textContent = awardedCount;
